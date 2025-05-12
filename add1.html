@@ -1,0 +1,84 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Add Item</title> 
+    <style> 
+        body { 
+            font-family: Arial, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background-color: #f7f7f7; 
+            margin: 0; 
+        } 
+        .form-container { 
+            background-color: #fff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            width: 300px; 
+        } 
+        .form-container h2 { 
+            margin-bottom: 20px; 
+            color: #333; 
+        } 
+        .form-container input { 
+            width: 100%; 
+            padding: 10px; 
+            margin-bottom: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+        } 
+        .form-container button { 
+            width: 100%; 
+            padding: 10px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #5cb85c; 
+            color: white; 
+            cursor: pointer; 
+        } 
+        .form-container button:hover { 
+            background-color: #4cae4c; 
+        } 
+    </style>  
+</head> 
+<body> 
+    <div class="form-container"> 
+        <h2>Add New Item</h2> 
+        <form id="addItemForm"> 
+            <input type="text" id="itemId" placeholder="Enter ID" required> 
+            <input type="text" id="itemImage" placeholder="Enter Image URL" required> 
+            <input type="text" id="itemName" placeholder="Enter Name" required> 
+            <input type="number" id="itemPrice" placeholder="Enter Price" required> 
+            <button type="submit">Add Product</button> 
+        </form> 
+    </div> 
+    <script> 
+        document.getElementById('addItemForm').addEventListener('submit', function(event) { 
+            event.preventDefault(); 
+            const id = document.getElementById('itemId').value; 
+            const image = document.getElementById('itemImage').value; 
+            const name = document.getElementById('itemName').value; 
+            const price = document.getElementById('itemPrice').value; 
+            if (!id || !image || !name || !price) { 
+                alert("Please fill in all fields."); 
+                return; 
+            } 
+            const urlParams = new URLSearchParams(window.location.search); 
+            const category = urlParams.get('category'); 
+            if (!category) { 
+                alert("Cannot determine the category. Please return to the main page."); 
+                return; 
+            } 
+            const items = JSON.parse(localStorage.getItem(category)) || []; 
+            items.push({ id, image, name, price }); 
+            localStorage.setItem(category, JSON.stringify(items)); 
+            window.location.href = category + '.html'; 
+        }); 
+    </script> 
+</body> 
+</html> 

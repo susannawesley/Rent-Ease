@@ -1,0 +1,189 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>  
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Appliances</title> 
+    <style> 
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background-color: #f7f7f7; 
+        } 
+        .container { 
+            display: flex; 
+            width: 90%; 
+            height: 80%; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            border-radius: 10px; 
+            overflow: hidden; 
+            background-color: #fff; 
+        } 
+        .sidebar { 
+            flex: 0 0 30%; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 20px; 
+            background-color: #f0f0f0; 
+            border-right: 1px solid #ddd; 
+        } 
+        .sidebar button { 
+            width: 80%; 
+            padding: 10px; 
+            margin-bottom: 20px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #007bff; 
+            color: white; 
+            cursor: pointer; 
+            font-size: 1em; 
+        } 
+        .sidebar button:hover { 
+            background-color: #0056b3; 
+        } 
+        .content { 
+            flex: 1; 
+            display: grid;   
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 20px; 
+            padding: 20px; 
+            width: 70%; 
+            justify-content: center; 
+            align-content: start; 
+        } 
+        .item { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 10px; 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+            border-radius: 10px; 
+            background-color: #f9f9f9; 
+            width: 90%; 
+            box-sizing: border-box; 
+        } 
+        .item img { 
+            width: 80px; 
+            height: 80px; 
+            margin-bottom: 10px; 
+            object-fit: cover; 
+            border-radius: 5px; 
+        } 
+        .item p { 
+            margin: 0 0 10px; 
+            text-align: center; 
+            font-size: 0.9em; 
+        } 
+        .actions { 
+            display: flex; 
+            gap: 10px; 
+            width: 100%; 
+            justify-content: center; 
+        } 
+        .actions button { 
+            padding: 5px 10px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #28a745; 
+            color: white; 
+            cursor: pointer; 
+        } 
+        .actions button.delete { 
+            background-color: #dc3545; 
+        } 
+        .actions button:hover { 
+            opacity: 0.8;    
+} 
+    </style> 
+</head> 
+<body> 
+    <div class="container"> 
+        <div class="sidebar"> 
+            <button onclick="navigateToAdd()">Add</button> 
+        </div> 
+        <div class="content" id="itemList"> 
+            <p>Oops!! Empty</p> 
+        </div> 
+    </div> 
+    <script> 
+        let items = []; 
+        function navigateToAdd() { 
+            window.location.href = 'add1.html?category=appliances'; 
+        } 
+        function editItem() { 
+            const index = prompt("Enter item index to edit (starting from 1):"); 
+            if (index && index > 0 && index <= items.length) { 
+                const item = items[index - 1]; 
+                const newId = prompt("Enter new item ID:", item.id); 
+                const newImage = prompt("Enter new item image URL:", item.image); 
+                const newName = prompt("Enter new item name:", item.name); 
+                const newPrice = prompt("Enter new item price:", item.price); 
+                if (newId && newImage && newName && newPrice) { 
+                    items[index - 1] = { id: newId, image: newImage, name: newName, price: newPrice }; 
+                    localStorage.setItem('appliances', JSON.stringify(items)); 
+                    displayItems(); 
+                } else { 
+                    alert("All fields must be filled out to edit the item."); 
+                } 
+            } else { 
+                alert("Invalid item index."); 
+            } 
+        } 
+        function deleteItem() { 
+            const index = prompt("Enter item index to delete (starting from 1):"); 
+            if (index && index > 0 && index <= items.length) { 
+                items.splice(index - 1, 1); 
+                localStorage.setItem('appliances', JSON.stringify(items)); 
+                displayItems(); 
+            } else { 
+                alert("Invalid item index."); 
+            }   
+        } 
+       function displayItems() { 
+            const itemList = document.getElementById('itemList'); 
+            items = JSON.parse(localStorage.getItem('appliances')) || []; 
+            if (items.length === 0) { 
+                itemList.innerHTML = '<p>Oops!! Empty</p>'; 
+            } else { 
+                itemList.innerHTML = items.map((item, index) => 
+                    `<div class="item"> 
+                        <img src="${item.image}" alt="${item.name}"> 
+                        <p>ID: ${item.id}<br>Name: ${item.name}<br>Price: $${item.price}</p> 
+                        <div class="actions"> 
+                            <button onclick="initiateEdit(${index})">Edit</button> 
+                            <button class="delete" onclick="initiateDelete(${index})">Delete</button> 
+                        </div> 
+                    </div>`).join(''); 
+            } 
+        } 
+        function initiateEdit(index) { 
+            const item = items[index]; 
+            const newId = prompt("Enter new item ID:", item.id); 
+            const newImage = prompt("Enter new item image URL:", item.image); 
+            const newName = prompt("Enter new item name:", item.name); 
+            const newPrice = prompt("Enter new item price:", item.price); 
+            if (newId && newImage && newName && newPrice) { 
+                items[index] = { id: newId, image: newImage, name: newName, price: newPrice }; 
+                localStorage.setItem('appliances', JSON.stringify(items)); 
+                displayItems(); 
+            } else { 
+                alert("All fields must be filled out to edit the item."); 
+            } 
+        } 
+        function initiateDelete(index) { 
+            items.splice(index, 1); 
+            localStorage.setItem('appliances', JSON.stringify(items)); 
+            displayItems(); 
+        } 
+        window.onload = function() { 
+            displayItems(); 
+        }; 
+    </script> 
+</body> 
+</html> 

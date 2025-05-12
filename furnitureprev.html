@@ -1,0 +1,102 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" href="Furniturestyle.css"> 
+  <title>Document</title> 
+</head> 
+<body> 
+ <div id="navbar"> 
+  <div onclick="goToHome()"><img src="https://is1ssl.mzstatic.com/image/thumb/Purple126/v4/f7/91/ef/f791ef78-2f7f-8227-e0dafb48bfbd117f/AppIcon-1x_U007emarketing-0-7-0-85-220.jpeg/1200x630wa.png" alt="err">   
+  </div> 
+      <div>Rent:Ease </div>     
+      <div>       
+      </div> 
+      <div><input type="text" id="nav_search" oninput="nav_search_fn()" placeholder="Search for Product " > 
+      <!-- <input type="image" src="./search.png"> --> 
+      <div> <img src="search.png" alt=""></div> 
+      </div> 
+      <div><img src="https://storied-mermaid-e7f527.netlify.app/img/cart.png" onclick="cart_clicked()" alt=""></div>       
+      <div><button id="home_login_button" onclick="show_login_popup()">LOGIN / SIGNUP</button></div> 
+  </div> 
+  <div id="header"> 
+      <ul class="breadcrumb"> 
+          <!-- <li><a href="#">Home</a></li> --> 
+          <li><a href="furnitureprev.html">Furniture</a></li> 
+          <li><a href="appliancesprev.html">Appliances</a></li> 
+          <li><a href="electronicsprev.html">Cameras</a></li> 
+      </ul> 
+      <div class="productLinksDiv"> 
+          <ul class="productLinks"> 
+              <!-- <li><a href="#">Product</a></li> --> 
+              <li><a href="fproducts.html">Furniture</a></li> 
+              <li><a href="aproducts.html">Appliances</a></li> 
+              <li><a href="eproducts.html">Cameras</a></li> 
+          </ul> 
+      </div> 
+  </div> 
+  <!-- main section --> 
+  <main> 
+      <!-- for heading and line --> 
+      <div class="heading"> 
+        <h1>Browse by Room type</h1> 
+      </div> 
+      <div class="line"></div> 
+       <!-- for the card --> 
+       <div class="cardlist"> 
+          <div class="card"> 
+           <div class="image"> 
+             <img src="https://www.rentomojo.com/public/images/category/package-bg/bedroomv1_new.jpg" alt="error"> 
+           </div> 
+           <div class="category"> 
+              <p>Bedroom</p> 
+           </div> 
+          </div> 
+          <div class="card"> 
+           <div class="image"> 
+             <img src="https://www.rentomojo.com/public/images/category/package-bg/living-roomv2.jpg" alt=""> 
+           </div> 
+           <div class="category"> 
+             <p>Living Room</p> 
+           </div> 
+          </div> 
+          <div class="card"> 
+            <div class="image"> 
+              <img src="https://www.rentomojo.com/public/images/category/package-bg/study-roomv1.jpg" alt=""> 
+            </div> 
+            <div class="category"> 
+              <p>Work From Home(WFH)</p> 
+            </div> 
+           </div> 
+           <div class="card"> 
+            <div class="image"> 
+              <img src="https://www.rentomojo.com/public/images/category/package-bg/diningv1.jpg" alt=""> 
+            </div> 
+            <div class="category">  
+              <p>Kitchen & Dining</p> 
+            </div> 
+           </div> 
+           <div class="card"> 
+            <div class="image"> 
+              <img src="https://www.rentomojo.com/public/images/category/package-bg/babyfurniture.jpg" alt=""> 
+            </div> 
+            <div class="category"> 
+              <p>Baby Furniture</p> 
+            </div> 
+           </div> 
+           <div class="card clickable"> 
+            <a href="fproducts.html"> 
+              <div class="image"> 
+                <img src="arrow.jpg" alt="" onclick="window.open('furnitureProduct.html')"> 
+              </div> 
+              <div class="category"> 
+                <p>View All In Furniture</p> 
+              </div> 
+            </a> 
+          </div> 
+   </div> 
+    </main> 
+</body> 
+</html> 
